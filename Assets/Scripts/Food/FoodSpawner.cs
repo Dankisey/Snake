@@ -30,7 +30,9 @@ public class FoodSpawner : MonoBehaviour
     private void Start()
     {
         //the area of the spawnzone of apples by coordinates (with little offset)
-        _maxSpawnedFood = (int)(Mathf.Sqrt(Mathf.Pow(_maxPosition.x - _minPosition.x + 1, 2)) * (Mathf.Sqrt(Mathf.Pow(_maxPosition.y - _minPosition.y + 1, 2)))) - _snake.StartSize * 3;
+        _maxSpawnedFood = (int)(Mathf.Sqrt(Mathf.Pow(_maxPosition.x - _minPosition.x + 1, 2)) * 
+            (Mathf.Sqrt(Mathf.Pow(_maxPosition.y - _minPosition.y + 1, 2)))) - _snake.StartSize * 3;
+
         _food = Instantiate(_prefab);
 
         Replace();

@@ -6,7 +6,7 @@ public class Snake : MonoBehaviour
 {
     public int StartSize => _startSize;
     
-    [SerializeField] private GameObject _tailPrefab;
+    [SerializeField] private Tail _tailPrefab;
     [SerializeField] private SnakeMover _mover;
     [SerializeField] private Eater _eater;
     [SerializeField] private int _startSize;
