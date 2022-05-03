@@ -4,10 +4,8 @@ using UnityEngine.Events;
 public class FoodSpawner : MonoBehaviour
 {
     [Range(0, 1)] [SerializeField] private float _raycastDistance;
-    [SerializeField] private int _minX;
-    [SerializeField] private int _maxX;
-    [SerializeField] private int _minY;
-    [SerializeField] private int _maxY;
+    [SerializeField] private Vector2Int _minPosition;
+    [SerializeField] private Vector2Int _maxPosition;
     [SerializeField] private Eater _eater;
     [SerializeField] private Snake _snake;
     [SerializeField] private Food _prefab;
@@ -32,7 +30,7 @@ public class FoodSpawner : MonoBehaviour
     private void Start()
     {
         //the area of the spawnzone of apples by coordinates (with little offset)
-        _maxSpawnedFood = (int)(Mathf.Sqrt(Mathf.Pow(_maxX - _minX + 1, 2)) * (Mathf.Sqrt(Mathf.Pow(_maxY - _minY + 1, 2)))) - _snake.StartSize * 3;
+        _maxSpawnedFood = (int)(Mathf.Sqrt(Mathf.Pow(_maxPosition.x - _minPosition.x + 1, 2)) * (Mathf.Sqrt(Mathf.Pow(_maxPosition.y - _minPosition.y + 1, 2)))) - _snake.StartSize * 3;
         _food = Instantiate(_prefab);
 
         Replace();
@@ -43,13 +41,13 @@ public class FoodSpawner : MonoBehaviour
         Replace();
     }
 
-    private void GetNewPosition()
+    private void FindNewPosition()
     {
         bool isSearchingPosition = true;
 
         while (isSearchingPosition)
         {
-            _newPosition = new Vector2(Random.Range(_minX, _maxX + 1), Random.Range(_minY, _maxY + 1));
+            _newPosition = new Vector2(Random.Range(_minPosition.x, _maxPosition.x + 1), Random.Range(_minPosition.y, _maxPosition.y + 1));
             var raycastCollider = Physics2D.Raycast(_newPosition, Vector2.up, _raycastDistance).collider;
 
             isSearchingPosition = raycastCollider != null;
@@ -66,7 +64,7 @@ public class FoodSpawner : MonoBehaviour
         }
         else
         {
-            GetNewPosition();
+            FindNewPosition();
             _food.transform.position = _newPosition;
 
             _food.gameObject.SetActive(true);

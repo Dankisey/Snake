@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class VictoryState : GameState
 {
-    [SerializeField] FoodSpawner _spawner;
+    [SerializeField] private FoodSpawner _spawner;
     [SerializeField] private TMP_Text _currentScore;
     [SerializeField] private TMP_Text _highScore;
     [SerializeField] private Score _score;
